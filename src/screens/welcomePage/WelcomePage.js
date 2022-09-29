@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import NavigationHeader from '../../navigationHeader';
+import LoginPage from '../login/loginPage';
+import SignUpPage from '../login/signUpPage';
 
 const WelcomePage = props => {
   return (

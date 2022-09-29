@@ -28,8 +28,6 @@ const NavigationHeader = props => {
   };
 
   useEffect(() => {
-    console.log('Check available data', productsInCart, cartProducts);
-
     getCartAction();
   }, [productsInCart]);
 

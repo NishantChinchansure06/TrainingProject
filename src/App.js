@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,29 +11,21 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import WelcomePage from './screens/welcomePage/WelcomePage';
-import ProductPage from './screens/productDetails/ProductsPage';
-import ProductDetails from './screens/productDetails/components/ProductDetails';
-import Cart from './screens/cart/Cart';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
-import Wishlist from './screens/wishlist/wishList';
+import Routes from './navigation/routes';
+import {AuthProvider} from './navigation/authProvider';
+import auth from '@react-native-firebase/auth';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  console.log('Running App.js', AuthProvider);
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={WelcomePage} />
-          <Stack.Screen name="Products" component={ProductPage} />
-          <Stack.Screen name="ProductDetails" component={ProductDetails} />
-          <Stack.Screen name="Cart" component={Cart} />
-          <Stack.Screen name="Wishlist" component={Wishlist} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </Provider>
   );
 };
