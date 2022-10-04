@@ -1,9 +1,10 @@
 import React, {useState, useEffect, createContext} from 'react';
 import auth from '@react-native-firebase/auth';
+import {firebase} from '@react-native-firebase/database';
+import '@react-native-firebase/firestore';
 
 export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
-  console.log('Running AuthProvider.js');
   const [user, setUser] = useState(null);
   return (
     <AuthContext.Provider
@@ -17,17 +18,31 @@ export const AuthProvider = ({children}) => {
             console.log('Error in LOGIN: ', err);
           }
         },
-        register: async (email, password) => {
+        register: async userData => {
           try {
-            console.log('Submit Pressed data', email, password);
-            await auth().createUserWithEmailAndPassword(email, password);
+            await auth()
+              .createUserWithEmailAndPassword(userData.email, userData.password)
+              .then(response => {
+                const uid = response.user.uid;
+                const usersRef = firebase.firestore().collection('users');
+                usersRef
+                  .doc(uid)
+                  .set({...userData, userId: uid})
+                  .then(() => {
+                    console.log('Successfully Added New User');
+                  })
+                  .catch(error => {
+                    console.log('error get here', error);
+                  });
+              });
           } catch (err) {
             console.log('Error in SIGNIN: ', err);
           }
         },
         logout: async () => {
           try {
-            await auth().signOut;
+            const res = await auth().signOut();
+            console.log('logout response', res);
           } catch (err) {
             console.log('Error in LOGOUT: ', err);
           }

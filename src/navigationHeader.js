@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,11 +13,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector, useDispatch} from 'react-redux';
+import {AuthContext} from './navigation/authProvider';
 import {getCart} from './store/action';
 
 const NavigationHeader = props => {
   const cartProducts = useSelector(state => state.cartReducer);
+  const {logout} = useContext(AuthContext);
 
   const dispatch = useDispatch();
 
@@ -44,6 +47,7 @@ const NavigationHeader = props => {
         height: 40,
         flexDirection: 'row',
         alignItems: 'center',
+        elevation: 3,
       }}>
       <View
         style={{
@@ -87,6 +91,17 @@ const NavigationHeader = props => {
           marginRight: 15,
           flex: 1,
         }}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('profile');
+          }}
+          style={{marginRight: 15}}>
+          <MaterialCommunityIcons
+            name="account-circle-outline"
+            color={'#ff8d6d'}
+            size={30}
+          />
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('Wishlist');

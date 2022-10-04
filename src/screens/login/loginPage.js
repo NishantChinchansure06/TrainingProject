@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -13,17 +14,21 @@ import {
   TextInput,
   FlatList,
 } from 'react-native';
+import {AuthContext} from '../../navigation/authProvider';
+import {firebase} from '@react-native-firebase/database';
+import '@react-native-firebase/firestore';
 
 const LoginPage = props => {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
-  console.log('LoginPage App.js');
+
+  const {login} = useContext(AuthContext);
+
   const onLoginIdChange = event => {
     setLoginId(event);
   };
 
   const onPasswordChange = event => {
-    console.log('Password value changed', event, typeof event);
     setPassword(event);
   };
 
@@ -32,8 +37,11 @@ const LoginPage = props => {
       userLogin: loginId,
       userPassword: password,
     };
-    console.log('Check user credentials', credentials);
+    login(credentials.userLogin, credentials.userPassword);
   };
+
+  const usersRef = firebase.firestore().collection('users');
+  console.log('Checking User ref', usersRef);
 
   return (
     <View

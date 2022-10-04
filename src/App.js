@@ -20,7 +20,6 @@ import auth from '@react-native-firebase/auth';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  console.log('Running App.js', AuthProvider);
   return (
     <Provider store={store}>
       <AuthProvider>

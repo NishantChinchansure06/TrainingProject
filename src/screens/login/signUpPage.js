@@ -15,8 +15,10 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-
+import {doc, setDoc} from 'firebase/firestore';
+import database from '@react-native-firebase/database';
 import {AuthContext} from '../../navigation/authProvider';
+import {db} from '../../firebaseConfig/config';
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -32,7 +34,6 @@ const loginValidationSchema = yup.object().shape({
 const SignUpPage = () => {
   const [selectedGender, setSelectedGender] = useState(0);
   const {register} = useContext(AuthContext);
-  console.log('Check auth contex', AuthContext, register);
 
   const startingValues = {
     firstName: '',
@@ -43,14 +44,38 @@ const SignUpPage = () => {
     gender: '',
   };
 
+  // database()
+  //   .ref('/users/123')
+  //   .once('value')
+  //   .then(snapshot => {
+  //     console.log('User data: ', snapshot.val());
+  //   });
+
+  // const signUpUser = async values => {
+  //   console.log('Submit Pressed 1', values);
+  //   await setDoc(doc(db, 'users', 'LA'), {
+  //     ...values,
+  //   })
+  //     .then(() => {
+  //       register(values.email, values.password);
+  //       console.log('User added successfully');
+  //     })
+  //     .catch(err => {
+  //       console.log('Error Adding User: ', err);
+  //     });
+  // };
+
+  const signUpUser = async values => {
+    register(values);
+  };
+
   return (
     <View>
       <Formik
         initialValues={startingValues}
         validationSchema={loginValidationSchema}
         onSubmit={values => {
-          console.log('Submit Pressed', values);
-          register(values.email, values.password);
+          signUpUser(values);
         }}>
         {({
           handleChange,

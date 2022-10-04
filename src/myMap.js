@@ -57,5 +57,43 @@
 // // 👇️ {'country' => 'Chile', 'name' => 'Tom'}
 // console.log(map1);
 
-console.log(x);
-let a = 10;
+// console.log(a);
+// let a = 10;
+
+function printPattern() {
+  let height = 3;
+
+  let width = 12;
+
+  let S = '';
+
+  for (var i = 0; i < height; i++) {
+    let printLine = i % 2 === 0;
+
+    for (var j = 0; j < width; j++) {
+      if (printLine) {
+        if (j === 0 || j === width - 1) {
+          S += '+';
+        } else {
+          if (j % 2 === 1) {
+            S += '/';
+          } else {
+            S += '\\';
+          }
+        }
+      } else {
+        if (j === 0 || j === width - 1) {
+          S += '|';
+        } else {
+          S += ' ';
+        }
+      }
+    }
+
+    console.log(S);
+
+    S = '';
+  }
+}
+
+printPattern();

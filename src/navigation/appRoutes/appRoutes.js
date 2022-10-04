@@ -8,6 +8,7 @@ import ProductDetails from '../../screens/productDetails/components/ProductDetai
 import Cart from '../../screens/cart/Cart';
 import Wishlist from '../../screens/wishlist/wishList';
 import {AuthProvider} from '../authProvider';
+import ProfilePage from '../../profile/profilePage';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Stack.Screen name="ProductDetails" component={ProductDetails} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Wishlist" component={Wishlist} />
+      <Stack.Screen name="profile" component={ProfilePage} />
     </Stack.Navigator>
   );
 };

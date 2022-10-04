@@ -6,7 +6,6 @@ import LoginRoutes from './loginRoutes/loginRoutes';
 import {AuthContext, AuthProvider} from './authProvider';
 
 const Routes = props => {
-  console.log('Running Routes.js', props);
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
