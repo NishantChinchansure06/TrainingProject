@@ -34,9 +34,13 @@ const ProductCard = props => {
 
   const [productsWishlisted, setProductWishlisted] = useState([]);
 
-  const addToWishList = () => dispatch(addWishList(props.item));
-  const removeFromWishListAction = () =>
+  const addToWishList = () => {
+    dispatch(addWishList(props.item));
+  };
+
+  const removeFromWishListAction = () => {
     dispatch(removeFromWishList(props.item?.id));
+  };
 
   const isWishlisted = productsWishlisted?.some(item => {
     if (props.item?.id === item.id) {
@@ -56,10 +60,11 @@ const ProductCard = props => {
       <View
         style={{
           margin: '2%',
-          borderWidth: 1,
+          borderWidth: 0.1,
           borderRadius: 10,
           height: 300,
           alignItems: 'center',
+          elevation: 3,
         }}>
         <View
           style={{

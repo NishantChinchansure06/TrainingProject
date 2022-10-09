@@ -52,7 +52,7 @@ const Cart = props => {
   }, [Products]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <NavigationHeader navigation={props.navigation} />
       {inCartProducts.length ? (
         <View style={{flex: 1}}>

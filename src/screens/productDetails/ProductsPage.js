@@ -27,8 +27,8 @@ const ProductPage = props => {
   }, [productState]);
 
   useEffect(() => {
-    getProducts();
-  }, [productState]);
+    getProductsList();
+  }, [Products]);
   // const Products = props.route.params.data || [];
   return (
     <View>
@@ -37,13 +37,14 @@ const ProductPage = props => {
         <View
           style={{
             flex: 1,
+            //backgroundColor: 'white',
           }}>
           <View
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
             }}>
-            <FlatList
+            {/* <FlatList
               data={Products}
               numColumns={2}
               renderItem={item => (
@@ -52,14 +53,14 @@ const ProductPage = props => {
                 </View>
               )}
               keyExtractor={item => item.id}
-            />
-            {/* {Products.map(item => {
+            /> */}
+            {Products.map(item => {
               return (
                 <View key={item.id} style={{flexBasis: '50%'}}>
                   <ProductCard navigation={props.navigation} item={item} />
                 </View>
               );
-            })} */}
+            })}
           </View>
         </View>
       </ScrollView>

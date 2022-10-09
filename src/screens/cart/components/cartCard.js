@@ -50,6 +50,8 @@ const CartCard = props => {
         borderRadius: 10,
         flexDirection: 'row',
         marginTop: 5,
+        elevation: 4,
+        padding: 3,
       }}>
       <View
         style={{
