@@ -16,6 +16,7 @@ import {store} from './store/store';
 import Routes from './navigation/routes';
 import {AuthProvider} from './navigation/authProvider';
 import auth from '@react-native-firebase/auth';
+import Flex from './flex';
 
 const Stack = createNativeStackNavigator();
 

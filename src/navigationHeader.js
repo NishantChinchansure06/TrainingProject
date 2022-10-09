@@ -39,6 +39,7 @@ const NavigationHeader = props => {
   }, [cartProducts]);
 
   const showBack = props.isHomepage ? false : true;
+  const showProfile = props.isProfile ? false : true;
 
   return (
     <View
@@ -91,17 +92,22 @@ const NavigationHeader = props => {
           marginRight: 15,
           flex: 1,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('profile');
-          }}
-          style={{marginRight: 15}}>
-          <MaterialCommunityIcons
-            name="account-circle-outline"
-            color={'#ff8d6d'}
-            size={30}
-          />
-        </TouchableOpacity>
+        {showProfile ? (
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('profile');
+            }}
+            style={{marginRight: 15}}>
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              color={'#ff8d6d'}
+              size={30}
+            />
+          </TouchableOpacity>
+        ) : (
+          <></>
+        )}
+
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('Wishlist');

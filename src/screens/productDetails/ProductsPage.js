@@ -28,7 +28,7 @@ const ProductPage = props => {
 
   useEffect(() => {
     getProductsList();
-  }, [productState]);
+  }, [Products]);
   // const Products = props.route.params.data || [];
   return (
     <View>

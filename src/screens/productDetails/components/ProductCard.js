@@ -34,18 +34,19 @@ const ProductCard = props => {
 
   const [productsWishlisted, setProductWishlisted] = useState([]);
 
-  const addToWishList = () => dispatch(addWishList(props.item));
-  const removeFromWishListAction = () =>
-    dispatch(removeFromWishList(props.item?.id));
+  const addToWishList = () => {
+    dispatch(addWishList(props.item));
+  };
 
-  let isWishlisted;
-  useEffect(() => {
-    isWishlisted = productsWishlisted?.some(item => {
-      if (props.item?.id === item.id) {
-        return true;
-      }
-    });
-  }, [props.item]);
+  const removeFromWishListAction = () => {
+    dispatch(removeFromWishList(props.item?.id));
+  };
+
+  const isWishlisted = productsWishlisted?.some(item => {
+    if (props.item?.id === item.id) {
+      return true;
+    }
+  });
 
   useEffect(() => {
     setProductWishlisted(wishlistedProducts.wishList);

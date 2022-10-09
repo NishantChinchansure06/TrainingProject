@@ -39,6 +39,17 @@ export const AuthProvider = ({children}) => {
             console.log('Error in SIGNIN: ', err);
           }
         },
+        update: async (userId, newData) => {
+          console.log('inside update authprovider :', userId, newData);
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(userId)
+            .update(newData)
+            .then(() => {
+              console.log('User updated!');
+            });
+        },
         logout: async () => {
           try {
             const res = await auth().signOut();

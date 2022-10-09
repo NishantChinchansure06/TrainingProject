@@ -52,7 +52,7 @@ const WelcomePage = props => {
           }}>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: '#0d0900'}}>
-              Welcome to Melorra Clone
+              Welcome to App
             </Text>
             <Text
               style={{
