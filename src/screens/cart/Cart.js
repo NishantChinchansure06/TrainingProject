@@ -33,18 +33,23 @@ const Cart = props => {
   const [productDeleted, setProductDeleted] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [totalCheckoutAmount, setTotalCheckoutAmount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   const getCartAction = payload => dispatch(getCart(payload));
   //const removeItemAction = id => dispatch();
 
+  console.log('cart products', Products);
   useEffect(() => {
     getCartAction();
     let totalAmount = 0;
+    let totalCount = 0;
     inCartProducts.forEach(element => {
       let thisProductTotalAmount = element.count * element.price;
       totalAmount += thisProductTotalAmount;
+      totalCount += element.count;
     });
     setTotalCheckoutAmount(totalAmount);
+    setTotalItems(totalCount);
   }, [inCartProducts, productDeleted]);
 
   useEffect(() => {
@@ -85,6 +90,7 @@ const Cart = props => {
               bottom: 20,
             }}
             onPress={() => {
+              console.log('show checkout pressed', showCheckout);
               setShowCheckout(true);
             }}>
             <Text style={{color: 'white', fontSize: 15}}>Checkout</Text>
@@ -137,7 +143,7 @@ const Cart = props => {
                   style={{
                     fontSize: 20,
                     color: 'black',
-                  }}>{`Total Items: ${inCartProducts.length}`}</Text>
+                  }}>{`Total Items: ${totalItems}`}</Text>
                 <Text
                   style={{
                     fontSize: 20,
@@ -165,10 +171,8 @@ const Cart = props => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
-                    onPress={() => props.navigation.navigate('Home')}>
-                    <Text style={{color: 'white', fontSize: 15}}>
-                      Go to home page
-                    </Text>
+                    onPress={() => onPayPressed()}>
+                    <Text style={{color: 'white', fontSize: 15}}>Continue</Text>
                   </TouchableOpacity>
                 </View>
               </View>
